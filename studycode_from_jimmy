@@ -1,0 +1,9 @@
+exprSet <- read.table('GSE42872_series_matrix.txt',sep='\t',quote="",fill=T,header=T,comment.char = "!") #load expression file
+
+rownames(exprSet) <- exprSet[,1]    exprSet <- exprSet[,-1] #make the probe_ID column be the rowname
+
+library(hugene10sttranscriptcluster.db)  #download and library the package corresponding to your platform
+
+ids <- toTable(hugene10sttranscriptclusterSYMBOL)  #get the probe_ID~gene_symbol table
+
+exprSet <- data[rownames(data) %in% ids$probe_id,]
